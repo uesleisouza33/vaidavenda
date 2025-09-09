@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="logoVAIfavIcon.png" type="image/pn">
+  <title>Vai - Transforme seu negócio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    }
+
+    :root {
+      --primary: #f15a24;
+      --primary-dark: #dc4f1b;
+      --secondary: #2d5bff;
+      --dark: #222;
+      --light: #fff;
+      --gray: #777;
+      --light-gray: #f5f7fa;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    header img {
+      height: 40px;
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 600;
+      position: relative;
+      padding: 5px 0;
+      transition: all 0.3s ease;
+    }
+
+    nav a:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover:after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px 100px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--dark), var(--primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      padding: 16px 32px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(241, 90, 36, 0.3);
+      position: relative;
+      overflow: hidden;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .btn:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: all 0.6s ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(241, 90, 36, 0.4);
+    }
+
+    .btn:hover:before {
+      left: 100%;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 10px rgba(241, 90, 36, 0.3);
+    }
+
+    /* Container para ícones flutuantes */
+    .floating-icons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Ícones animados */
+    .icon {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+      opacity: 0.8;
+      transition: all 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+
+    .icon:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+    .icon img {
+      width: 70%;
+      height: auto;
+    }
+
+    .icon.instagram {
+      top: 15%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .icon.facebook {
+      top: 20%;
+      right: 15%;
+      animation-delay: 1s;
+    }
+
+    .icon.whatsapp {
+      bottom: 20%;
+      left: 20%;
+      animation-delay: 2s;
+    }
+
+    .icon.rocket {
+      bottom: 15%;
+      right: 10%;
+      width: 70px;
+      height: 70px;
+      animation: rocket-move 8s linear infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      33% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+      66% {
+        transform: translateY(10px) rotate(-5deg);
+      }
+    }
+
+    @keyframes rocket-move {
+      0% {
+        transform: translate(0, 0) rotate(-15deg);
+      }
+      25% {
+        transform: translate(-15px, -20px) rotate(-20deg);
+      }
+      50% {
+        transform: translate(10px, -30px) rotate(-10deg);
+      }
+      75% {
+        transform: translate(-5px, -10px) rotate(-20deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(-15deg);
+      }
+    }
+
+    /* Efeito de partículas tecnológicas */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: particle-float 15s infinite linear;
+    }
+
+    @keyframes particle-float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .results {
+      text-align: center;
+      padding: 100px 20px;
+      background: var(--light-gray);
+      position: relative;
+    }
+
+    .results h2 {
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .results > p {
+      margin-bottom: 60px;
+      color: var(--gray);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: var(--light);
+      border: 1px solid #eee;
+      border-radius: 16px;
+      padding: 30px;
+      width: 320px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      text-align: left;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 0;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
+      transition: height 0.5s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(230, 120, 30, 0.15);
+      border-color: transparent;
+    }
+
+    .card:hover:before {
+      height: 100%;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .card-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+      border: 3px solid var(--primary);
+      box-shadow: 0 4px 10px rgba(241, 90, 36, 0.2);
+    }
+
+    .card-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-info {
+      flex: 1;
+    }
+
+    .card-info strong {
+      display: block;
+      font-size: 1.1rem;
+      color: var(--dark);
+      margin-bottom: 5px;
+    }
+
+    .card-info span {
+      font-size: 0.9rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--gray);
+      position: relative;
+      z-index: 1;
+      font-style: italic;
+      padding-left: 15px;
+      border-left: 3px solid #eee;
+    }
+
+    .cta {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    /* Nova seção de Valores, Missão e Visão */
+    .values {
+      padding: 100px 20px;
+      background: var(--primary);
+      color: white;
+      text-align: center;
+    }
+
+    .values h2 {
+      font-size: 2.2rem;
+      margin-bottom: 60px;
+      font-weight: 700;
+    }
+
+    .values-cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .value-card {
+      background: white;
+      color: var(--dark);
+      border-radius: 16px;
+      padding: 40px 30px;
+      width: 350px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .value-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 25px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .value-card:hover .value-icon {
+      transform: scale(1.1) rotate(5deg);
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+
+    .value-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .value-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .read-more {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .read-more:after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .read-more:hover:after {
+      width: 100%;
+    }
+
+    .read-more:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Footer e Mapa */
+    .footer {
+      background: var(--dark);
+      color: white;
+      padding: 0;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 400px;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      filter: grayscale(20%) invert(90%) contrast(85%);
+    }
+
+    .footer-content {
+      padding: 60px 40px 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .footer-logo {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-logo img {
+      height: 40px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo p {
+      color: #aaa;
+      line-height: 1.6;
+      max-width: 300px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .footer-column {
+      min-width: 180px;
+    }
+
+    .footer-column h4 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .footer-column a {
+      display: block;
+      color: #aaa;
+      text-decoration: none;
+      margin-bottom: 12px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      padding: 20px 40px;
+      border-top: 1px solid #444;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .footer-bottom a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom a:hover {
+      color: var(--primary);
+    }
+
+    .legal-links {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    /* Responsividade */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .icon {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .icon.rocket {
+        width: 60px;
+        height: 60px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      
+      nav a {
+        margin-left: 0;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .icon {
+        display: none;
+      }
+      
+      .icon.rocket, .icon.whatsapp {
+        display: flex;
+      }
+      
+      .footer-content {
+        flex-direction: column;
+        gap: 40px;
+      }
+      
+      .footer-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .legal-links {
+        justify-content: center;
+        margin-top: 10px;
+      }
+      
+      .card-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .card-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 60px 15px;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .btn {
+        padding: 14px 26px;
+        font-size: 1rem;
+      }
+      
+      .results h2 {
+        font-size: 1.8rem;
+      }
+      
+      .card {
+        width: 100%;
+        max-width: 320px;
+      }
+      
+      .value-card {
+        width: 100%;
+        padding: 30px 20px;
+      }
+      
+      .footer-column {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logoVAI.png" alt="Vai Logo">
+    <nav>
+      <a href="#">HOME</a>
+      <a href="#">SOBRE A VAI</a>
+      <a href="#">PLATAFORMA</a>
+      <a href="#">SAIBA MAIS</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="floating-icons">
+      <div class="icon instagram"><img src="instagram.png" alt="Instagram"></div>
+      <div class="icon facebook"><img src="mensager.png" alt="Facebook"></div>
+      <div class="icon whatsapp"><img src="whatsapp.png" alt="WhatsApp"></div>
+      <div class="icon rocket"><img src="rocket.png" alt="Foguete"></div>
+    </div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="hero-content">
+      <h1>Transforme seu atendimento em uma experiência inteligente</h1>
+      <p>Deixe a tecnologia trabalhar para você. Com automação inteligente, sua equipe atende mais clientes, com mais eficiência e sem perder qualidade</p>
+      <button class="btn">Fale com um especialista</button>
+    </div>
+  </section>
+
+  <section class="results">
+    <h2>Resultados de quem confia e recomenda</h2>
+    <p>Empresas de diferentes setores já aumentaram vendas e produtividade com a Vai da Venda</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-avatar">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80" alt="Ana Souza">
+          </div>
+          <div class="card-info">
+            <strong>Ana Souza</strong>
+            <span>Souza Roupas</span>
+          </div>
+        </div>
+        <p>"Antes demorávamos mais de 10 minutos para responder cada cliente. Com a Vai da Venda, automatizamos o atendimento e conseguimos aumentar em 45% nossas vendas em apenas 2 meses."</p>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="card-avatar">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" alt="Carlos Silva">
+          </div>
+          <div class="card-info">
+            <strong>Carlos Silva</strong>
+            <span>TechSolutions</span>
+          </div>
+        </div>
+        <p>"A implementação da Vai revolucionou nosso atendimento. Reduzimos o tempo de resposta em 70% e aumentamos a satisfação dos clientes significativamente."</p>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <div class="card-avatar">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=388&q=80" alt="Marina Oliveira">
+          </div>
+          <div class="card-info">
+            <strong>Marina Oliveira</strong>
+            <span>BemEstar Saúde</span>
+          </div>
+        </div>
+        <p>"Com a Vai, conseguimos escalar nosso atendimento sem aumentar custos. A ferramenta é intuitiva e os resultados foram visíveis desde a primeira semana."</p>
+      </div>
+    </div>
+
+    <div class="cta">
+      <button class="btn">Quero vender mais agora</button>
+    </div>
+  </section>
+
+  <!-- Nova seção de Valores -->
+  <section class="values">
+    <h2>Nossos Pilares</h2>
+    <div class="values-cards">
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3>Missão</h3>
+        <p>Transformar a comunicação digital, oferecendo soluções acessíveis e inovadoras para empresas de todos os tamanhos. Nosso propósito é simplificar processos e conectar empresas aos seus clientes de forma eficiente.</p>
+        <a href="#" class="read-more">Ler mais</a>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h3>Visão</h3>
+        <p>Inovação com propósito. Construímos com determinação, paixão e atenção aos detalhes. Buscamos constantemente a excelência e investimos na qualidade de nossos produtos para superar expectativas.</p>
+        <a href="#" class="read-more">Ler mais</a>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3>Valores</h3>
+        <p>Pessoas no centro de tudo. Valorizamos a conexão, o respeito e a colaboração entre todos. Acreditamos no equilíbrio entre bem-estar e trabalho, promovendo um ambiente inclusivo e diverso.</p>
+        <a href="#" class="read-more">Ler mais</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer com Mapa -->
+  <footer class="footer">
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3550.7938145216935!2d-48.61094702380285!3d-27.13130350237396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94d8ae288455272f%3A0xc07f8e1ece4df4ab!2sR.%20244%2C%20723%20-%20Andorinha%2C%20Itapema%20-%20SC%2C%2088220-000!5e0!3m2!1spt-BR!2sbr!4v1757425107456!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="logoVAI.png" alt="Vai Logo">
+        <p>Soluções inteligentes em automação de atendimento para impulsionar suas vendas e melhorar a experiência do cliente.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Empresa</h4>
+          <a href="#">Sobre nós</a>
+          <a href="#">Nossa equipe</a>
+          <a href="#">Carreiras</a>
+          <a href="#">Cases de sucesso</a>
+        </div>
+        <div class="footer-column">
+          <h4>Produtos</h4>
+          <a href="#">Soluções</a>
+          <a href="#">Preços</a>
+          <a href="#">Recursos</a>
+          <a href="#">API</a>
+        </div>
+        <div class="footer-column">
+          <h4>Suporte</h4>
+          <a href="#">Central de ajuda</a>
+          <a href="#">Documentação</a>
+          <a href="#">Contato</a>
+          <a href="#">Status do sistema</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2023 VAI TECNOLOGIA LTDA. Todos os direitos reservados. CNPJ: 52.165.389/0001-29</div>
+      <div class="legal-links">
+        <a href="#">Termos de uso</a>
+        <a href="#">Política de privacidade</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Criar partículas tecnológicas
+    document.addEventListener('DOMContentLoaded', function() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Tamanho aleatório entre 3 e 8px
+        const size = Math.random() * 5 + 3;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Posição aleatória
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Duração aleatória da animação
+        const duration = Math.random() * 10 + 15;
+        particle.style.animationDuration = `${duration}s`;
+        
+        // Atraso aleatório
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    });
+  </script>
+</body>
+</html>
